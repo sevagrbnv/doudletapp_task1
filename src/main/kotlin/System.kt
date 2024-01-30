@@ -12,16 +12,16 @@ class System {
 
     fun filterPushes(list: List<Push>) {
 
-        val filter: Filter = BaseFilter().also {
-            it.addFilter(FilterByAge(params.age()))
-            it.addFilter(FilterByExpire(params.time()))
-            it.addFilter(FilterByGender(params.gender()))
-            it.addFilter(FilterByLocation(params.x_coord(), params.y_coord()))
-            it.addFilter(FilterByTech(params.osVersion()))
+        val filter: Filter = BaseFilter().apply {
+            addFilter(FilterByAge(params.age()))
+            addFilter(FilterByExpire(params.time()))
+            addFilter(FilterByGender(params.gender()))
+            addFilter(FilterByLocation(params.x_coord(), params.y_coord()))
+            addFilter(FilterByTech(params.osVersion()))
         }
 
         list.forEach { push ->
-            if (filter.isMatched(push))
+            if (!filter.isNotMatched(push))
                 filteredListOfPushes.add(push)
         }
     }
@@ -53,5 +53,4 @@ class System {
 
         fun y_coord() = params["y_coord"] as Float
     }
-
 }

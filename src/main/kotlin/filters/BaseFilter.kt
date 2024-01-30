@@ -10,10 +10,10 @@ class BaseFilter: Filter {
         filterList.add(filter)
     }
 
-    override fun isMatched(push: Push): Boolean {
+    override fun isNotMatched(push: Push): Boolean {
         for (filter in filterList) {
-            if (!filter.isMatched(push)) return false
+            if (filter.isNotMatched(push)) return true
         }
-        return true
+        return false
     }
 }

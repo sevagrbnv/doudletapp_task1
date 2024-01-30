@@ -2,7 +2,6 @@ import pushes.PushFactory
 import pushes.abstractions.Push
 
 fun main() {
-
     val system = System()
     val pushList = mutableListOf<Push>()
 

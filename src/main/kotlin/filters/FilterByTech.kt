@@ -7,10 +7,10 @@ class FilterByTech(
     private val os_version: Int
 ) : Filter {
 
-    override fun isMatched(push: Push): Boolean {
+    override fun isNotMatched(push: Push): Boolean {
         if (push is HasTechParam) {
-            return push.os_version > os_version
+            return os_version > push.os_version
         }
-        return true
+        return false
     }
 }

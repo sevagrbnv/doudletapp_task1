@@ -6,10 +6,10 @@ import pushes.abstractions.Push
 class FilterByAge(
     private val age: Int
 ): Filter {
-    override fun isMatched(push: Push): Boolean {
+    override fun isNotMatched(push: Push): Boolean {
         if (push is HasAgeParam) {
-            return push.age <= age
+            return push.age > age
         }
-        return true
+        return false
     }
 }

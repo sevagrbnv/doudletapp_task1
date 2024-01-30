@@ -8,10 +8,10 @@ class FilterByGender(
     private val gender: Gender
 ): Filter {
 
-    override fun isMatched(push: Push): Boolean {
+    override fun isNotMatched(push: Push): Boolean {
         if (push is HasGenderParam) {
-            return push.gender == gender
+            return push.gender != gender
         }
-        return true
+        return false
     }
 }

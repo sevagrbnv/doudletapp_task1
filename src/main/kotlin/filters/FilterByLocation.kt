@@ -3,21 +3,23 @@ package filters
 import pushes.abstractions.HasLocationParams
 import pushes.abstractions.Push
 import kotlin.math.pow
+import kotlin.math.sqrt
 
 class FilterByLocation(
     private val x: Float, private val y: Float
 ) : Filter {
 
-    override fun isMatched(push: Push): Boolean {
+    override fun isNotMatched(push: Push): Boolean {
         if (push is HasLocationParams) {
-            return (isInCircle(push))
+            return (isNotInCircle(push))
         }
-        return true
+        return false
     }
 
-    private fun isInCircle(push: HasLocationParams): Boolean {
-        val sqrDX = (push.x_coord - x).toDouble().pow(2.0)
-        val sqrDY = (push.y_coord - y).toDouble().pow(2.0)
-        return sqrDX + sqrDY <= push.radius.toDouble().pow(2.0)
+    private fun isNotInCircle(push: HasLocationParams): Boolean {
+        val xDistance = Math.abs(x - push.x_coord)
+        val yDistance = Math.abs(y - push.y_coord)
+        val euclideanDistance = sqrt(xDistance.pow(2) + yDistance.pow(2))
+        return euclideanDistance > push.radius.toFloat()
     }
 }

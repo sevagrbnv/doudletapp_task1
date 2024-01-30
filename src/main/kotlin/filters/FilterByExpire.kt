@@ -7,10 +7,10 @@ class FilterByExpire(
     private val time: Long
 ): Filter {
 
-    override fun isMatched(push: Push): Boolean {
+    override fun isNotMatched(push: Push): Boolean {
         if (push is HasExpiryDateParam) {
-            return push.expiry_date >= time
+            return push.expiry_date < time
         }
-        return true
+        return false
     }
 }
